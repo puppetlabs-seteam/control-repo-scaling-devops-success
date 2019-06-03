@@ -7,7 +7,7 @@ class profile::platform::baseline::windows::firewall {
   windows_firewall::exception { 'Permit ICMPv4':
     ensure       => present,
     direction    => 'in',
-    action       => 'Allow',
+    action       => 'allow',
     enabled      => 'yes',
     protocol     => 'ICMPv4',
     display_name => 'Permit ICMPv4',
@@ -17,7 +17,7 @@ class profile::platform::baseline::windows::firewall {
   windows_firewall::exception { 'WINRM':
     ensure       => present,
     direction    => 'in',
-    action       => 'Allow',
+    action       => 'allow',
     enabled      => 'yes',
     protocol     => 'TCP',
     local_port   => '5985',
@@ -29,7 +29,7 @@ class profile::platform::baseline::windows::firewall {
   windows_firewall::exception { 'RDP':
     ensure       => present,
     direction    => 'in',
-    action       => 'Allow',
+    action       => 'allow',
     enabled      => 'yes',
     protocol     => 'TCP',
     local_port   => '3889',
