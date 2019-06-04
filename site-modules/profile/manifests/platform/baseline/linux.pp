@@ -6,5 +6,6 @@ class profile::platform::baseline::linux {
   include ::profile::platform::baseline::users::linux
   include ::profile::platform::baseline::linux::ssh
   include ::profile::platform::baseline::linux::firewall
+  include ::profile::platform::baseline::linux::service_user
 
 }
