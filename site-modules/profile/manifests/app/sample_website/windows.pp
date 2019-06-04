@@ -1,6 +1,6 @@
 class profile::app::sample_website::windows (
   String $doc_root           = 'C:\inetpub\wwwroot\sample_website',
-  String $webserver_port     = '80',
+  Integer $webserver_port    = 80,
   String $apppool            = 'sample_website',
   String $website_source_dir = 'puppet:///modules/profile/app/sample_website',
   Boolean $enable_monitoring = false,
@@ -33,7 +33,7 @@ class profile::app::sample_website::windows (
   windows_firewall::exception { 'IIS':
     ensure       => present,
     direction    => 'in',
-    action       => 'Allow',
+    action       => 'allow',
     enabled      => 'yes',
     protocol     => 'TCP',
     local_port   => $webserver_port,
