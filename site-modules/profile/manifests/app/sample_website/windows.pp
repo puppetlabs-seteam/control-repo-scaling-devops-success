@@ -22,10 +22,15 @@ class profile::app::sample_website::windows (
   }
 
   iis_site { 'sample_website':
-    ensure          => 'started',
-    physicalpath    => $doc_root,
-    applicationpool => $apppool,
-    require         => [
+    ensure                   => 'started',
+    physicalpath             => $doc_root,
+    applicationpool          => $apppool,
+    bindings                 => [
+      { 'bindinginformation'      => "*:${webserver_port}:",
+        'protocol'                => 'http',
+      }
+    ],
+    require                  => [
       Iis_application_pool['sample_website']
     ],
   }
