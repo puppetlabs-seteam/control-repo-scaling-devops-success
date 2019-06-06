@@ -1,0 +1,24 @@
+#Plan to avoid the activation of SkyNet through clever use of Canadian Time Servers.
+parameters:
+  nodes:
+    type: TargetSpec
+steps:
+  - name: stop_W32Time
+    task: service
+    target: $nodes
+    parameters:
+      action: stop
+      name: W32Time
+  - name: set_time_servers
+    task: set_time_servers
+    target: $nodes
+    parameters:
+      timeservers: 0.ca.pool.ntp.org,1.ca.pool.ntp.org
+  - name: start_W32Time
+    task: service
+    target: $nodes
+    parameters:
+      action: start
+      name: W32Time
+return: $start_W32Time
+  

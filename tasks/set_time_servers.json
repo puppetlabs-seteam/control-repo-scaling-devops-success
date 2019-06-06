@@ -1,0 +1,9 @@
+{
+  "description": "Set timeserver value registry key",
+  "parameters": {
+    "timeservers": {
+      "type": "String",
+      "description": "A comma separated list of timeservers to set."
+    }
+  }
+}
