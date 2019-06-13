@@ -11,6 +11,7 @@ plan tools::install_splunk_forwarder(
     }
 
     class { '::splunk::forwarder':
+      if $facts['kernel'] == 'Windows' {
         package_provider => 'chocolatey',
         package_name     => 'splunk-universalforwarder',
 #        install_options  => [
@@ -25,6 +26,7 @@ plan tools::install_splunk_forwarder(
 #          'WINEVENTLOG_SET_ENABLE=1',
 #          'ENABLEADMON=1',
 #        ]
+      }
     }
   }
 }
