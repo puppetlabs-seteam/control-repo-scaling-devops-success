@@ -1,3 +1,16 @@
-mod 'puppet-splunk', git: 'https://github.com/voxpupuli/puppet-splunk.git', ref: '820a15b'
-mod 'puppetlabs-splunk_qd', git: 'https://github.com/puppetlabs/puppetlabs-splunk_qd.git', ref: 'master'
+#Dependancies
+mod 'puppetlabs-stdlib', '5.2.0'
+mod 'puppetlabs-inifile', '2.5.0'
+mod 'puppetlabs-concat', '5.3.0'
+mod 'puppetlabs-archive', '3.2.1'
+
+#Splunk Modules
+mod 'puppet-splunk', 
+  git: 'https://github.com/voxpupuli/puppet-splunk.git', 
+  ref: '820a15b'
+mod 'puppetlabs-splunk_qd', 
+  git: 'https://github.com/puppetlabs/puppetlabs-splunk_qd.git', 
+  ref: 'master'
+
+#Local Modules
 mod 'tools', local:true

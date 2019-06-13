@@ -27,5 +27,5 @@ On your workstation do this prep work:
 
 You should now have your windows host prepared for the demo. The demo will be performed via an RDP session to this host.
 
-NOTE: for the demo, run a "bolt plan show" and a "bolt task show" before going live. This will prelead things into memory and make things faster during the demo. 
+NOTE: for the demo, run a "bolt plan show" and a "bolt task show" before going live. This will preload things into memory and make things faster during the demo. 
 There is a small pause when using bolt from windows in a new session (known issue), once bolt has run once it's faster going forward.
