@@ -10,8 +10,8 @@ plan tools::install_splunk_forwarder(
       server => $splunk_server,
     }
 
-    class { '::splunk::forwarder':
-      if $facts['kernel'] == 'Windows' {
+    if($facts['kernel'] == 'Windows') {
+      class { '::splunk::forwarder':
         package_provider => 'chocolatey',
         package_name     => 'splunk-universalforwarder',
 #        install_options  => [
@@ -27,6 +27,9 @@ plan tools::install_splunk_forwarder(
 #          'ENABLEADMON=1',
 #        ]
       }
+    }
+    else {
+      include ::splunk::forwarder
     }
   }
 }
