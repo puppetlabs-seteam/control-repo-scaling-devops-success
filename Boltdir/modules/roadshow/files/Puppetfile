@@ -1,0 +1,3 @@
+mod 'puppet-splunk', git: 'https://github.com/voxpupuli/puppet-splunk.git', ref: '820a15b'
+mod 'puppetlabs-splunk_qd', git: 'https://github.com/puppetlabs/puppetlabs-splunk_qd.git', ref: 'master'
+mod 'tools', local:true

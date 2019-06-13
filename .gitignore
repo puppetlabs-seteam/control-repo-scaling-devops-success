@@ -24,3 +24,5 @@ coverage
 /Boltdir/modules/roadshow/files/inventory.yaml
 /Boltdir/modules/roadshow/files/*.pem
 *.pem
+.rerun.json
+
