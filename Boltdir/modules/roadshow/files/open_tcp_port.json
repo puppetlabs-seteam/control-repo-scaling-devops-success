@@ -1,0 +1,9 @@
+{
+  "description": "Opens a TCP firewall port in the Windows firewall",
+  "parameters": {
+    "port": {
+      "type": "String",
+      "description": "A TCP port number to open"
+    }
+  }
+}
