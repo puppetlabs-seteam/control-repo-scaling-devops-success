@@ -20,3 +20,7 @@ log
 .yardoc
 coverage
 .fixtures.yml
+/Boltdir/inventory.yaml
+/Boltdir/modules/roadshow/files/inventory.yaml
+/Boltdir/modules/roadshow/files/*.pem
+*.pem
