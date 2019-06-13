@@ -27,5 +27,4 @@ plan roadshow::prep_boltdemo(
 
   # Install Puppetfile on demo host
   run_command('bolt puppetfile install', $demo_host, "Installing Puppetfile for ${demo_user} on ${demo_host}")
-
 }

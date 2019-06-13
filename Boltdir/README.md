@@ -29,3 +29,5 @@ You should now have your windows host prepared for the demo. The demo will be pe
 
 NOTE: for the demo, run a "bolt plan show" and a "bolt task show" before going live. This will preload things into memory and make things faster during the demo. 
 There is a small pause when using bolt from windows in a new session (known issue), once bolt has run once it's faster going forward.
+
+NOTE2: Reboot all your windows hosts before demo time to make sure there are no reboots pending, this will cause the demo to fail. (didn't have time to properly implement a test/fix for this). This can be done with "bolt command run 'shutdown /r /t 0' -n allwindows"

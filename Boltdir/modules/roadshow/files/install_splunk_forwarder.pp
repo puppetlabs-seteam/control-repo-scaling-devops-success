@@ -6,13 +6,25 @@ plan tools::install_splunk_forwarder(
   apply_prep($nodes)
 
   apply($nodes) {
-    include ::splunk
     class { '::splunk::params':
       server => $splunk_server,
     }
 
     class { '::splunk::forwarder':
-      package_ensure => 'latest',
+        package_provider => 'chocolatey',
+        package_name     => 'splunk-universalforwarder',
+#        install_options  => [
+#          'INSTALLDIR=C:\\Program Files\\SplunkUniversalForwarder',
+#          'AGREETOLICENSE=YES',
+#          'LAUNCHSPLUNK=0',
+#          'SERVICESTARTTYPE=auto',
+#          'WINEVENTLOG_APP_ENABLE=1',
+#          'WINEVENTLOG_SEC_ENABLE=1',
+#          'WINEVENTLOG_SYS_ENABLE=1',
+#          'WINEVENTLOG_FWD_ENABLE=1',
+#          'WINEVENTLOG_SET_ENABLE=1',
+#          'ENABLEADMON=1',
+#        ]
     }
   }
 }
