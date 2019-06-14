@@ -21,7 +21,7 @@ On your workstation do this prep work:
 * Get your `student.pem` from `https://${your_branch}.classroom.puppet.com` and drop it into `./Boltdir/modules/roadshow/files`
   * NOTE: This file is in the `.gitignore`, so you can't push it back up. In fact `*.pem` is in `.gitignore` for safety.
 * Run the bolt plan to prepare your windows host
-  * `bolt plan run roadshow::pre_boltdemo branch_name=${your_hydra_branch}`
+  * `bolt plan run roadshow::prep_boltdemo branch_name=${your_hydra_branch}`
   * if you want to use a different student vm for the demo, you can add the `demo_host_id` parameter to change the host (default is `demo_host_id=0`)
 
 You should now have your windows host prepared for the demo. The demo will be performed via an RDP session to this host.
