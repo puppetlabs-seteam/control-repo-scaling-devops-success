@@ -74,7 +74,7 @@ function createInventoryFile ($inputs, $Branch, $SavePath) {
     $yaml += "  - name: lnxstudents`n"
     $yaml += "    nodes:`n"
     foreach ($h in $inputs) {
-        if ($h.LinuxHostname -ne "") {
+        if ($null -ne $h.LinuxHostname) {
             $ip = [System.Net.Dns]::GetHostAddresses($h.LinuxHostname)
             $yaml += "      - ${ip}`n"
         }
@@ -89,7 +89,7 @@ function createInventoryFile ($inputs, $Branch, $SavePath) {
     $yaml += "  - name: winstudents`n"
     $yaml += "    nodes:`n"
     foreach ($h in $inputs) {
-        if ($h.WinHostname -ne "") {
+        if ($null -ne $h.WinHostname) {
             $ip = [System.Net.Dns]::GetHostAddresses($h.WinHostname)
             $yaml += "      - ${ip}`n"
         }
@@ -103,7 +103,9 @@ function createInventoryFile ($inputs, $Branch, $SavePath) {
     $yaml += "  - name: allwindows`n"
     $yaml += "    nodes:`n"
     foreach ($h in $inputs) {
-        $yaml += "      - " + $h.WinHostname + "`n"
+        if ($null -ne $h.WinHostname) {
+            $yaml += "      - " + $h.WinHostname + "`n"
+        }
     }
     $yaml += "    config:`n"
     $yaml += "      transport: winrm`n"
@@ -114,7 +116,9 @@ function createInventoryFile ($inputs, $Branch, $SavePath) {
     $yaml += "  - name: alllinux`n"
     $yaml += "    nodes:`n"
     foreach ($h in $inputs) {
-        $yaml += "      - " + $h.LinuxHostname + "`n"
+        if ($null -ne $h.LinuxHostname) {
+            $yaml += "      - " + $h.LinuxHostname + "`n"
+        }
     }
     $yaml += "    config:`n"
     $yaml += "      transport: ssh`n"
@@ -124,7 +128,8 @@ function createInventoryFile ($inputs, $Branch, $SavePath) {
     $yaml += "        run-as: root`n"
     $yaml += "        private-key: Boltdir\\student.pem`n"
 
-    [IO.File]::WriteAllLines($filename, $yaml)
+    write-host Writing to file $filename
+    $yaml | Out-File $filename -Encoding ASCII
 
 }
 
