@@ -14,7 +14,7 @@ On your workstation do this prep work:
 * git clone https://github.com/puppetlabs-seteam/control-repo-scaling-devops-success.git
 * cd control-repo-scaling-devops-success
 * Run the bolt plan to prepare your windows host
-  * `bolt plan run roadshow::prep_boltdemo branch_name=<Your Branch Here> -u puppetinstructor -p '@Pupp3t1abs' --transport winrm --no-ssl`
+  * `bolt plan run roadshow::prep_boltdemo branch_name=<Your Branch Here> reboot_windows_hosts=<true|false> -u puppetinstructor -p '@Pupp3t1abs' --transport winrm --no-ssl`
   * if you want to use a different student vm for the demo, you can add the `demo_host_id` parameter to change the host (default is `demo_host_id=0`)
 
 You should now have your windows host prepared for the demo. The demo will be performed via an RDP session to this host.

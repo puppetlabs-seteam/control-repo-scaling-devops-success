@@ -124,7 +124,7 @@ function createInventoryFile ($inputs, $Branch, $SavePath) {
     $yaml += "        run-as: root`n"
     $yaml += "        private-key: Boltdir\\student.pem`n"
 
-    $yaml | Out-File $filename
+    [IO.File]::WriteAllLines($filename, $yaml)
 
 }
 
