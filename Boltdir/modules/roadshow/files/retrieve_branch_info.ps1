@@ -51,8 +51,8 @@ function getHostData ($idx, $Branch, $SavePath) {
 
 function testConnect ($h) {
     Try {
-        Test-Connect $h -Count 2 -Delay 1
-        return $?
+        $test = Test-Connect $h -Count 2 -Delay 1
+        return $test
     }
     Catch {
         return $false
