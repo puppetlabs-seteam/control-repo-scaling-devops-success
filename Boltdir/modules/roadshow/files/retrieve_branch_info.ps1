@@ -25,11 +25,12 @@ function getHostData ($idx, $Branch, $SavePath) {
             LinuxHostname = "";
             WinHostname = "";
             RDPPassword = "";
+            Valid = $false;
         }
     } 
     Catch {
         #return on failed login
-        $result = @{ StatusCode = $loginResponse.StatusCode; }
+        $result = @{ StatusCode = $loginResponse.StatusCode; Valid = $false }
         return $result
     }
 
@@ -43,8 +44,19 @@ function getHostData ($idx, $Branch, $SavePath) {
         $result.LinuxHostname = $Branch + "nix" + $idx + ".classroom.puppet.com"
         $result.WinHostname = $Branch + "win" + $idx + ".classroom.puppet.com"
         $result.RDPPassword = $loginResponse.ParsedHtml.getElementById("winrdp-passwd").getAttribute("data-clipboard-text")
+        $result.Valid = $true
     }
     return $result
+}
+
+function testConnect ($h) {
+    Try {
+        Test-Connect $h -Count 2 -Delay 1
+        return $?
+    }
+    Catch {
+        return $false
+    }
 }
 
 function createInventoryFile ($inputs, $Branch, $SavePath) {
@@ -74,7 +86,8 @@ function createInventoryFile ($inputs, $Branch, $SavePath) {
     $yaml += "  - name: lnxstudents`n"
     $yaml += "    nodes:`n"
     foreach ($h in $inputs) {
-        if ($null -ne $h.LinuxHostname) {
+        $tc = testConnect($h.LinuxHostname)
+        if ($tc -and $null -ne $h.LinuxHostname) {
             $ip = [System.Net.Dns]::GetHostAddresses($h.LinuxHostname)
             $yaml += "      - ${ip}`n"
         }
@@ -89,8 +102,9 @@ function createInventoryFile ($inputs, $Branch, $SavePath) {
     $yaml += "  - name: winstudents`n"
     $yaml += "    nodes:`n"
     foreach ($h in $inputs) {
-        if ($null -ne $h.WinHostname) {
-            $ip = [System.Net.Dns]::GetHostAddresses($h.WinHostname)
+        $tc = testConnect($h.WinHostname)
+        if ($tc -and $null -ne $h.WinHostname) {
+            write-host Adding $h.WinHostname $h.Valid $h.RDPPassword
             $yaml += "      - ${ip}`n"
         }
     }
@@ -103,7 +117,8 @@ function createInventoryFile ($inputs, $Branch, $SavePath) {
     $yaml += "  - name: allwindows`n"
     $yaml += "    nodes:`n"
     foreach ($h in $inputs) {
-        if ($null -ne $h.WinHostname) {
+        $tc = testConnect($h.WinHostname)
+        if ($tc -and $null -ne $h.WinHostname) {
             $yaml += "      - " + $h.WinHostname + "`n"
         }
     }
@@ -116,7 +131,8 @@ function createInventoryFile ($inputs, $Branch, $SavePath) {
     $yaml += "  - name: alllinux`n"
     $yaml += "    nodes:`n"
     foreach ($h in $inputs) {
-        if ($null -ne $h.LinuxHostname) {
+        $tc = testConnect($h.LinuxHostname)
+        if ($tc -and $null -ne $h.LinuxHostname) {
             $yaml += "      - " + $h.LinuxHostname + "`n"
         }
     }
