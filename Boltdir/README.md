@@ -13,15 +13,8 @@ You will need:
 On your workstation do this prep work:
 * git clone https://github.com/puppetlabs-seteam/control-repo-scaling-devops-success.git
 * cd control-repo-scaling-devops-success
-* Get your `inventory.yaml` from Slack in `#team-svcsport-chatter` and drop it into `./Boltdir/modules/roadshow/files`
-  * NOTE: This file is in the `.gitignore`, so you can't push it back up.
-  * remove any duplicate entries that may be in that file (this happened on multiple apply/destory cycles with hydra)
-  * update the puppetinstructor password entries (multiple) to '@Pupp3t1abs', with the single quotes intact.
-  * change references to linux private key from `private-key: ~/.ssh/student.pem` to `private-key: Boltdir\\student.pem`
-* Get your `student.pem` from `https://${your_branch}.classroom.puppet.com` and drop it into `./Boltdir/modules/roadshow/files`
-  * NOTE: This file is in the `.gitignore`, so you can't push it back up. In fact `*.pem` is in `.gitignore` for safety.
 * Run the bolt plan to prepare your windows host
-  * `bolt plan run roadshow::prep_boltdemo branch_name=${your_hydra_branch}`
+  * `bolt plan run roadshow::prep_boltdemo branch_name=<Your Branch Here> -u puppetinstructor -p '@Pupp3t1abs' --transport winrm --no-ssl`
   * if you want to use a different student vm for the demo, you can add the `demo_host_id` parameter to change the host (default is `demo_host_id=0`)
 
 You should now have your windows host prepared for the demo. The demo will be performed via an RDP session to this host.

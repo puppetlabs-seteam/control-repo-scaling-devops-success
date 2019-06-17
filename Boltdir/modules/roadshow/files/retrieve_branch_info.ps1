@@ -74,8 +74,10 @@ function createInventoryFile ($inputs, $Branch, $SavePath) {
     $yaml += "  - name: lnxstudents`n"
     $yaml += "    nodes:`n"
     foreach ($h in $inputs) {
-        $ip = [System.Net.Dns]::GetHostAddresses($h.LinuxHostname)
-        $yaml += "      - ${ip}`n"
+        if ($h.LinuxHostname -ne "") {
+            $ip = [System.Net.Dns]::GetHostAddresses($h.LinuxHostname)
+            $yaml += "      - ${ip}`n"
+        }
     }
     $yaml += "    config:`n"
     $yaml += "      transport: ssh`n"
@@ -87,8 +89,10 @@ function createInventoryFile ($inputs, $Branch, $SavePath) {
     $yaml += "  - name: winstudents`n"
     $yaml += "    nodes:`n"
     foreach ($h in $inputs) {
-        $ip = [System.Net.Dns]::GetHostAddresses($h.WinHostname)
-        $yaml += "      - ${ip}`n"
+        if ($h.WinHostname -ne "") {
+            $ip = [System.Net.Dns]::GetHostAddresses($h.WinHostname)
+            $yaml += "      - ${ip}`n"
+        }
     }
     $yaml += "    config:`n"
     $yaml += "      transport: winrm`n"

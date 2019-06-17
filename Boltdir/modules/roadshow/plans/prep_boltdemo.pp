@@ -26,7 +26,7 @@ plan roadshow::prep_boltdemo(
   run_command("mkdir -Force -p ${demo_taskdir}", $demo_host, "Creating Boltdir for ${demo_user} account on ${demo_host}")
 
   # Upload inventory.yaml, student.pem, Puppetfile and install_splunk_fowarder paln to the demo host Boltdir
-  run_script('roadshow/retrieve_branch_info.ps1', $demo_host, 'arguments' => ['MaxHosts',$max_hosts,'Branch',$branch_name,'SavePath',$demo_userdir], "Running inventory prep script on ${demo_host}")
+  run_script('roadshow/retrieve_branch_info.ps1', $demo_host, "Running inventory prep script on ${demo_host}", 'arguments' => [$max_hosts,$branch_name,"${demo_userdir}\\"])
   upload_file($source_puppetfile, $demo_boltdir, $demo_host, "Uploading Puppetfile to ${demo_host}")
   upload_file($source_psscript, $demo_boltdir, $demo_host, "Uploading ${source_psscript} to ${demo_host} into ${demo_boltdir}")
   upload_file($source_psscript, $demo_taskdir, $demo_host, "Uploading ${source_psscript} to ${demo_host} into ${demo_taskdir}")
