@@ -12,6 +12,7 @@ plan roadshow::prep_boltdemo(
   String[1] $source_psscriptmeta = 'roadshow/open_tcp_port.json',
   Integer $max_hosts = 10,
 ) {
+  # lint:ignore:140chars
   $demo_host = "${branch_name}win${demo_host_id}.classroom.puppet.com"
   $demo_userdir = "C:\\Users\\${demo_user}"
   $demo_boltdir = "C:\\Users\\${demo_user}\\Boltdir"
@@ -38,8 +39,10 @@ plan roadshow::prep_boltdemo(
   run_command('bolt puppetfile install', $demo_host, "Installing Puppetfile for ${demo_user} on ${demo_host}")
 
   #Activate Firewalls on Windows nodes
-  run_command('bolt command run \'Set-Service "MpsSvc" -StartupType Automatic\' -n allwindows', $demo_host, "Enabling Firewall on Windows Hosts")
-  run_command('bolt command run \'netsh advfirewall firewall add rule name="Open Port 5985" dir=in action=allow protocol=TCP localport=5985\' -n allwindows', $demo_host, "Openning Firewall Port 5985 on Windows Hosts")
-  run_command('bolt command run \'netsh advfirewall firewall add rule name="Open Port 5986" dir=in action=allow protocol=TCP localport=5986\' -n allwindows', $demo_host, "Openning Firewall Port 5986 on Windows Hosts")
-  run_command('bolt command run \'Set-Service -Name "MpsSvc" -Status Running\' -n allwindows', $demo_host, "Starting Firewall Service on Windows Hosts")
+  run_command('bolt command run \'Set-Service "MpsSvc" -StartupType Automatic\' -n allwindows', $demo_host, 'Enabling Firewall on Windows Hosts')
+  run_command('bolt command run \'netsh advfirewall firewall add rule name="Open Port 5985" dir=in action=allow protocol=TCP localport=5985\' -n allwindows', $demo_host, 'Opening Firewall Port 5985 on Windows Hosts')
+  run_command('bolt command run \'netsh advfirewall firewall add rule name="Open Port 5986" dir=in action=allow protocol=TCP localport=5986\' -n allwindows', $demo_host, 'Opening Firewall Port 5986 on Windows Hosts')
+  run_command('bolt command run \'Set-Service -Name "MpsSvc" -Status Running\' -n allwindows', $demo_host, 'Starting Firewall Service on Windows Hosts')
+
+  # lint:endignore
 }
