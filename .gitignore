@@ -23,6 +23,8 @@ coverage
 /Boltdir/inventory.yaml
 /Boltdir/modules/roadshow/files/inventory.yaml
 /Boltdir/modules/roadshow/files/*.pem
+/Boltdir/modules/roadshow/files/*.ppk
 *.pem
+*.ppk
 .rerun.json
 

@@ -9,6 +9,7 @@ plan roadshow::prep_boltdemo(
   String[1] $source_isfplan = 'roadshow/install_splunk_forwarder.pp',
   String[1] $source_psscript = 'roadshow/open_tcp_port.ps1',
   String[1] $source_psscriptmeta = 'roadshow/open_tcp_port.json',
+  Integer $max_hosts = 10,
 ) {
   $demo_host = "${branch_name}win${demo_host_id}.classroom.puppet.com"
   $demo_userdir = "C:\\Users\\${demo_user}"
@@ -24,8 +25,9 @@ plan roadshow::prep_boltdemo(
   run_command("mkdir -Force -p ${demo_taskdir}", $demo_host, "Creating Boltdir for ${demo_user} account on ${demo_host}")
 
   # Upload inventory.yaml, student.pem, Puppetfile and install_splunk_fowarder paln to the demo host Boltdir
-  upload_file($source_inventory, $demo_boltdir, $demo_host, "Uploading inventory.yaml to ${demo_host}")
-  upload_file($source_student_pem, $demo_boltdir, $demo_host, "Uploading student.pem to ${demo_host}")
+  #upload_file($source_inventory, $demo_boltdir, $demo_host, "Uploading inventory.yaml to ${demo_host}")
+  #upload_file($source_student_pem, $demo_boltdir, $demo_host, "Uploading student.pem to ${demo_host}")
+  run_script('roadshow/retrieve_branch_info.ps1', $demo_host, 'arguments' => ['MaxHosts',$max_hosts,'Branch',$branch_name,'SavePath',$demo_userdir], "Running inventory prep script on ${demo_host}")
   upload_file($source_puppetfile, $demo_boltdir, $demo_host, "Uploading Puppetfile to ${demo_host}")
   upload_file($source_psscript, $demo_boltdir, $demo_host, "Uploading ${source_psscript} to ${demo_host} into ${demo_boltdir}")
   upload_file($source_psscript, $demo_taskdir, $demo_host, "Uploading ${source_psscript} to ${demo_host} into ${demo_taskdir}")
