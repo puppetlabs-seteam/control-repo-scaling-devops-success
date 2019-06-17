@@ -51,12 +51,7 @@ function getHostData ($idx, $Branch, $SavePath) {
 
 function testConnect ($h) {
     Try {
-        if (Test-Connect $h -Count 2 -Delay 1) {
-            return $true
-        }
-        else {
-            return $false
-        }
+        return Test-Connection $h -Count 2 -Delay 1 -Quiet -TimeToLive 1
     }
     Catch {
         return $false
@@ -90,8 +85,7 @@ function createInventoryFile ($inputs, $Branch, $SavePath) {
     $yaml += "  - name: lnxstudents`n"
     $yaml += "    nodes:`n"
     foreach ($h in $inputs) {
-        $tc = testConnect $h.LinuxHostname
-        if ($tc -and $null -ne $h.LinuxHostname) {
+        if ($null -ne $h.LinuxHostname -and (testConnect $h.LinuxHostname)) {
             $ip = [System.Net.Dns]::GetHostAddresses($h.LinuxHostname)
             $yaml += "      - ${ip}`n"
         }
@@ -106,9 +100,8 @@ function createInventoryFile ($inputs, $Branch, $SavePath) {
     $yaml += "  - name: winstudents`n"
     $yaml += "    nodes:`n"
     foreach ($h in $inputs) {
-        $tc = testConnect $h.WinHostname
-        if ($tc -and $null -ne $h.WinHostname) {
-            write-host Adding $h.WinHostname $h.Valid $h.RDPPassword
+        if ($null -ne $h.WinHostname -and (testConnect $h.WinHostname)) {
+            $ip = [System.Net.Dns]::GetHostAddresses($h.WinHostname)
             $yaml += "      - ${ip}`n"
         }
     }
@@ -121,8 +114,7 @@ function createInventoryFile ($inputs, $Branch, $SavePath) {
     $yaml += "  - name: allwindows`n"
     $yaml += "    nodes:`n"
     foreach ($h in $inputs) {
-        $tc = testConnect $h.WinHostname
-        if ($tc -and $null -ne $h.WinHostname) {
+        if ($null -ne $h.WinHostname -and (testConnect $h.WinHostname)) {
             $yaml += "      - " + $h.WinHostname + "`n"
         }
     }
@@ -135,8 +127,7 @@ function createInventoryFile ($inputs, $Branch, $SavePath) {
     $yaml += "  - name: alllinux`n"
     $yaml += "    nodes:`n"
     foreach ($h in $inputs) {
-        $tc = testConnect $h.LinuxHostname
-        if ($tc -and $null -ne $h.LinuxHostname) {
+        if ($null -ne $h.LinuxHostname -and (testConnect $h.LinuxHostname)) {
             $yaml += "      - " + $h.LinuxHostname + "`n"
         }
     }
