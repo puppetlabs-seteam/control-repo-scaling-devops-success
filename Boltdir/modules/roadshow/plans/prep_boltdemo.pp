@@ -11,7 +11,7 @@ plan roadshow::prep_boltdemo(
   String[1] $source_psscript = 'roadshow/open_tcp_port.ps1',
   String[1] $source_psscriptmeta = 'roadshow/open_tcp_port.json',
   Integer $max_hosts = 10,
-  Bool $reboot_windows_hosts = false,
+  Boolean $reboot_windows_hosts = false,
 ) {
   # lint:ignore:140chars
   $demo_host = "${branch_name}win${demo_host_id}.classroom.puppet.com"
