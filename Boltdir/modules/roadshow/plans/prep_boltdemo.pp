@@ -46,7 +46,7 @@ plan roadshow::prep_boltdemo(
   run_command('bolt command run \'Set-Service -Name "MpsSvc" -Status Running\' -n allwindows', $demo_host, 'Starting Firewall Service on Windows Hosts')
 
   if ($reboot_windows_hosts == true) {
-    runcommand('bolt command run \'Shutdown /r /t 10\' -n allwindows', $demo_host, 'Restarting Windows hosts.')
+    run_command('bolt command run \'Shutdown /r /t 10\' -n allwindows', $demo_host, 'Restarting Windows hosts.')
   }
 
   # lint:endignore
