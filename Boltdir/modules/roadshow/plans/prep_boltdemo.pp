@@ -39,6 +39,9 @@ plan roadshow::prep_boltdemo(
   # Install Puppetfile on demo host
   run_command('bolt puppetfile install', $demo_host, "Installing Puppetfile for ${demo_user} on ${demo_host}")
 
+  #Disable 2nd Ethernet on all windows nodes (hydra bug)
+  run_command('bolt command run \'Disable-NetAdapter "Ethernet 2" -Confirm:$false\' -n allwindows', $demo_host, 'Disabling 2nd NIC on Windows Hosts')
+
   #Activate Firewalls on Windows nodes
   run_command('bolt command run \'Set-Service "MpsSvc" -StartupType Automatic\' -n allwindows', $demo_host, 'Enabling Firewall on Windows Hosts')
   run_command('bolt command run \'netsh advfirewall firewall add rule name="Open Port 5985" dir=in action=allow protocol=TCP localport=5985\' -n allwindows', $demo_host, 'Opening Firewall Port 5985 on Windows Hosts')
@@ -46,7 +49,7 @@ plan roadshow::prep_boltdemo(
   run_command('bolt command run \'Set-Service -Name "MpsSvc" -Status Running\' -n allwindows', $demo_host, 'Starting Firewall Service on Windows Hosts')
 
   if ($reboot_windows_hosts == true) {
-    runcommand('bolt command run \'Shutdown /r /t 10\' -n allwindows', $demo_host, 'Restarting Windows hosts.')
+    run_command('bolt command run \'Shutdown /r /t 10\' -n allwindows', $demo_host, 'Restarting Windows hosts.')
   }
 
   # lint:endignore
