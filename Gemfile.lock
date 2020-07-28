@@ -113,7 +113,7 @@ GEM
     inifile (3.0.0)
     jaro_winkler (1.5.2)
     jgrep (1.5.0)
-    json (2.2.0)
+    json (2.3.1)
     json-schema (2.8.1)
       addressable (>= 2.4)
     locale (2.1.2)
@@ -289,7 +289,6 @@ PLATFORMS
   x86_64-darwin-18
 
 DEPENDENCIES
-  CFPropertyList
   beaker (>= 3.16.0)
   beaker-puppet_install_helper
   beaker-rspec
