@@ -22,8 +22,8 @@ GEM
   remote: https://rubygems.org/
   specs:
     CFPropertyList (2.3.6)
-    addressable (2.6.0)
-      public_suffix (>= 2.0.2, < 4.0)
+    addressable (2.8.0)
+      public_suffix (>= 2.0.2, < 5.0)
     ansi (1.5.0)
     ast (2.4.0)
     beaker (4.6.0)
@@ -163,7 +163,7 @@ GEM
       byebug (>= 9.0, < 9.1)
       pry (~> 0.10)
     psych (3.1.0)
-    public_suffix (3.0.3)
+    public_suffix (4.0.6)
     puppet (5.5.10)
       facter (> 2.0.1, < 4)
       fast_gettext (~> 1.1.2)
@@ -289,7 +289,6 @@ PLATFORMS
   x86_64-darwin-18
 
 DEPENDENCIES
-  CFPropertyList
   beaker (>= 3.16.0)
   beaker-puppet_install_helper
   beaker-rspec
